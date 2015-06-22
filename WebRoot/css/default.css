@@ -1,0 +1,519 @@
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,dialog,div,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,meter,nav,object,ol,output,p,pre,progress,q,rp,rt,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video,xmp
+	{
+	border: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 100%
+}
+
+html,body {
+	height: 100%;
+	cursor: default;
+	overflow-x: hidden;
+	background: #f3f3f3;
+	font-family: "微软雅黑";
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:LINK {
+	text-decoration: none;
+}
+
+li,label {
+	cursor: pointer;
+}
+
+hr {
+	color: #ddd;
+}
+
+div,input[type="text"],input[type="password"] {
+	outline-style:none;
+}
+
+/**------------------ 改变google浏览器滚动条样式 -------------------------- */
+/* 滚动条的宽度 */
+::-webkit-scrollbar {
+	width: 20px;
+	height: 14px;
+}
+
+/*垂直方向的下按钮*/
+::-webkit-scrollbar-button:vertical:increment {
+	background: #096;
+	height: 15px;
+}
+
+/*横向的右边按钮*/
+::-webkit-scrollbar-button:horizontal:increment {
+	background: #096;
+	width: 20px;
+}
+
+/*垂直方向的上按钮*/
+::-webkit-scrollbar-button:vertical:decrement {
+	background: #096;
+	height: 14px;
+}
+
+/*横向的左按钮*/
+::-webkit-scrollbar-button:horizontal:decrement {
+	background: #096;
+	width: 20px;
+}
+
+/*滚动槽的颜色 */
+::-webkit-scrollbar-track-piece {
+	background-color: #666;
+}
+
+/* 滑轮的颜色 */
+::-webkit-scrollbar-thumb:vertical {
+	height: 50px;
+	background-color: #666;
+	border: 1px solid #096;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	height: 50px;
+	background-color: #666;
+	border: 1px solid #096;
+	border-radius: 10px;
+}
+
+::selection {
+	background: #096;
+}
+/* -------------------------------------------------------------------- */
+.bg-orange {
+	background: orange;
+}
+
+.text-orange {
+	color: orange;
+}
+
+.bg-def {
+	background: #1CBD9D;
+}
+
+.text-def {
+	color: #1CBD9D;
+}
+
+.text-red {
+	color: red;
+}
+
+.fs20 {
+	font-size: 20px;
+}
+
+.fs18 {
+	font-size: 18px;
+}
+
+.fs16 {
+	font-size: 16px;
+}
+
+.width150 {
+	width: 150px;
+}
+
+.width299 {
+	width: 299px;
+}
+
+.width251 {
+	width: 251px;
+}
+
+.width600 {
+	width: 600px;
+}
+
+.width800 {
+	width: 800px;
+}
+
+.pdleft20 {
+	padding-left: 20px;
+}
+
+.selnone {
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-khtml-user-select: none; /* you could also put this in a class */
+	-webkit-user-select: none; /* and add the CSS class here instead */
+	-ms-user-select: none;
+	user-select: none; /**禁止选中文字*/
+}
+
+.textinput {
+	outline: none;
+	padding: 2px 5px;
+	height: 25px;
+	font-size: 14px;
+}
+
+/* -------------------------------------------------------------------- */
+.mt10 {
+	margin-top: 10px;
+}
+
+.ml100 {
+	margin-left: 100px;
+}
+.ml130 {
+	margin-left: 130px;
+}
+.ml150 {
+	margin-left: 150px;
+}
+.ml190 {
+	margin-left: 190px;
+}
+.mr10 {
+	margin-right: 10px;
+}
+
+.pt10 {
+	padding-top: 10px;
+}
+
+.pl20 {
+	padding-left: 20px;
+}
+
+.pl40 {
+	padding-left: 40px;
+}
+
+/* ----------------------登录框部分css---------------------------------------------- */
+#mask {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	background: rgba(0, 0, 0, .5);
+}
+
+.loginpanel {
+	z-index: 100;
+	position: relative;
+	width: 550px;
+	height: 300px;
+	border: 1px solid #096;
+	background: #fff;
+}
+
+.loginpanel .loginbox {
+	width: 410px;
+	height: 250px;
+	margin: 40px auto;
+}
+
+.loginpanel .loginbox .login-tab ul {
+	border: 1px solid #ddd;
+	height: 35px;
+	width: 400px;
+}
+
+.loginpanel .loginbox .login-tab ul li {
+	list-style: none;
+	cursor: pointer;
+	font-size: 16px;
+	float: left;
+	width: 200px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	background: -moz-linear-gradient(top, #f3f3f3, #efefef);
+	background: -webkit-gradient(linear, center top, center bottom, from(#f3f3f3),
+		to(#efefef));
+}
+
+.loginpanel .loginbox .login-tab ul li:hover {
+	color: #096;
+}
+
+.loginpanel .loginbox .login-tab .curent {
+	background: #fff;
+	color: #096;
+}
+
+.loginpanel .loginbox .login-inps {
+	position: relative;
+}
+
+.loginpanel .loginbox .login-inps .login-inp {
+	position: absolute;
+	top: 20px;
+	left: 0;
+	width: 500px;
+	height: 200px;
+	display: none;
+}
+
+.loginpanel .loginbox .login-inps .login-inp #email-inp,#phone-inp,#email-pwd,#phone-pwd
+	{
+	width: 270px;
+	height: 35px;
+	border-radius: 5px;
+	padding: 0 8px;
+	margin-top: 2px;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+.loginpanel .loginbox .login-inps .login-inp input[type="button"] {
+	width: 288px;
+	margin-left: 80px;
+	height: 40px;
+	cursor: pointer;
+	font-size: 16px;
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 0.3s;
+	-webkit-transition-timing-function: ease;
+	-webkit-transition-property: color;
+	-webkit-transition-duration: 0.2s;
+	-webkit-transition-timing-function: ease;
+}
+
+.loginpanel .loginbox .login-inps .login-inp input[type="button"]:hover
+	{
+	background: #096;
+	color: #f3f3f3;
+}
+
+.loginpanel .loginbox .login-inps .login-inp input[type="checkbox"] {
+	margin-top: 10px;
+}
+
+.loginpanel .loginbox .login-inps .login-inp .autologin {
+	line-height: 33px;
+	margin-left: 3px;
+	width: auto;
+}
+
+.loginpanel .loginbox .login-inps .login-inp label {
+	width: 400px;
+	height: 35px;
+	display: block;
+	margin-top: 10px;
+}
+
+.loginpanel .loginbox .login-inps .login-inp label i {
+	width: 80px;
+	height: 35px;
+	display: block;
+	text-align: right;
+	line-height: 35px;
+	font-size: 14px;
+}
+
+.loginpanel .loginbox .login-inps .login-inp label input,i {
+	float: left;
+}
+
+.loginpanel .loginbox .login-inps .login-inp .day7 {
+	color: #096;
+}
+
+.loginpanel .loginbox .login-inps .login-inp .day7 span {
+	color: #096;
+	font-size: 14px;
+}
+
+.loginpanel #closeLogin {
+	width: 28px;
+	height: 28px;
+	display: block;
+	border: 1px solid transparent;
+	border-radius: 32px;
+	text-align: center;
+	line-height: 28px;
+	font-size: 16px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.loginpanel #closeLogin:hover {
+	background: #ddd;
+	color: #fff;
+}
+
+/* ----------------------消息框部分css---------------------------------------------- */
+#messageMask {
+	width: 100%;
+	height: 100%;
+	background: #000;
+	background: rgb(0, 0, 0); /*不支持rgba的浏览器*/
+	background: rgba(0, 0, 0, .5); /*支持rgba的浏览器*/
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,
+		endColorstr=#7f000000); /*IE8支持*/
+	position: absolute;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	display: none;
+}
+
+#messageMask #messageBox {
+	width: 450px;
+	height: 220px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	position: absolute;
+	z-index: 100;
+	background: #fff;
+}
+
+#messageMask #messageBox .messageTitle {
+	width: 100%;
+	height: 40px;
+	border-bottom: 1px solid #ddd;
+}
+
+#messageBox .messageTitle .messageText {
+	width: 200px;
+	font-size: 16px;
+	line-height: 40px;
+	padding-left: 20px;
+	color: #666;
+	display: inline-block;
+	float: left;
+}
+
+#messageMask #messageBox #msgClose {
+	float: right;
+	width: 32px;
+	font-size: 16px;
+	line-height: 40px;
+	display: block;
+	margin-right: 20px;
+	text-align: center;
+}
+
+#messageMask #messageBox #msgClose:hover {
+	color: red;
+}
+
+#messageMask #messageBox .contentBox {
+	width: 100%;
+	height: 100px;
+}
+
+#messageMask #messageBox .contentBox #messageContext {
+	width: 350px;
+	height: 100px;
+	margin: 0 auto;
+	font-size: 16px;
+	line-height: 100px;
+}
+
+#messageMask #messageBox .buttonBox {
+	width: 250px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+#messageMask #messageBox .buttonBox .messageButton,#timeText {
+	float: left;
+}
+
+#messageMask #messageBox .buttonBox #timeText {
+	display: block;
+	width: 120px;
+	font-size: 14px;
+	line-height: 35px;
+}
+
+#messageMask #messageBox .buttonBox .messageButton {
+	width: 100px;
+	height: 35px;
+	background: #096;
+	color: #f3f3f3;
+	display: inline-block;
+	text-align: center;
+	line-height: 35px;
+	font-size: 14px;
+	margin-right: 20px;
+}
+
+#messageMask .clear {
+	clear: both;
+}
+
+
+/* ----------------------COMBOBOX 部分css---------------------------------------------- */
+.mycombox {
+	width: 350px;
+	height: 30px;
+	border: 1px solid #ccc;
+	position: relative;
+}
+
+.mycombox .combox-inp {
+	width: 305px;
+	line-height: 30px;
+	overflow: hidden;
+	padding: 0 5px;
+	border:none;
+}
+
+.mycombox .combox-drop {
+	display: block;
+	width: 32px;
+	height: 30px;
+	font-size: 10px;
+	color: #666;
+	text-decoration: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	line-height: 30px;
+	text-align: center;
+	border-left: 1px solid #ccc;
+	cursor: pointer;
+}
+
+.mycombox .combox-list {
+	width: 317px;
+	border: 1px solid #ddd;
+	border-top: 1px solid transparent;
+	position: absolute;
+	top:31px;
+	left: -1px;
+	display: none;
+	background:#fff;
+}
+
+.mycombox .combox-list ul li {
+	width: 307px;
+	list-style: none;
+	line-height: 30px;
+	padding: 0 5px;
+	cursor: pointer;
+	font-size: 100%;
+}
+
+.mycombox .combox-list ul li:hover {
+	background: #f3f3f3;
+	color:#096;
+}
