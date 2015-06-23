@@ -93,7 +93,7 @@ body {
 		<div class="nav-box">
 			<ul>
 				<li class="bg-orange"><a href="javascript:void(0);">首页</a></li>
-				<li><a href="${basePath }goods/add.jxp"  class="nav-title">商品管理</a></li>
+				<li><a href="${basePath }goods/add"  class="nav-title">商品管理</a></li>
 				<li><a href="${basePath }order/edit.jxp" class="nav-title">订单管理</a></li>
 				<li><a href="javascript:void(0);" class="nav-title">客户管理</a></li>
 				<li><a href="javascript:void(0);" class="nav-title">系统设置</a></li>

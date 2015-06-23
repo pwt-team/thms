@@ -1,3 +1,4 @@
+<%@page import="com.thms.bean.Goods"%>
 <%@page import="com.thms.bean.Unit"%>
 <%@page import="com.thms.bean.GoodsType"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
@@ -63,9 +64,8 @@ body {
 	height:auto;
 	background:#fafafa;
 	margin:0 auto;
-	padding:30px 0px;
+	padding:20px 0px;
 	border:1px solid #fafafa;
-	margin-bottom:30px;
 }
 
 .panel .p-title {
@@ -74,8 +74,7 @@ body {
 
 .panel .p-items {
 	width:1000px;
-	margin:0 auto;
-	margin-bottom:30px;
+	margin:10px auto;
 }
 
 .panel .p-items .i-title {
@@ -84,17 +83,29 @@ body {
 	background:#f3f3f3;
 	line-height:50px;
 	padding-left:20px;
-	margin-bottom:15px;
 	font-size:13px;
+	margin-bottom:20px;
 }
-
+.panel #gnewbtn {
+	width:900px;
+	height:40px;
+	margin:0 auto;
+}
 .panel .p-items .item {
 	width:900px;
 	height:35px;
-	margin:0 auto;
-	margin-bottom:10px;
+	margin:0px auto;
 }
-
+.panel .p-items .gimgbox {
+	width:640px;
+	height:130px;
+	margin:10px auto;
+}
+.panel .p-items .gimgbox #gmainimg{
+	width:150px;
+	height:130px;
+	border:1px solid #ddd;
+}
 .panel .p-items .item .inputbox {
 	width:900px;
 }
@@ -110,21 +121,21 @@ body {
 .panel .p-items .opt-name {
 	width:130px;
 	text-align:right;
-	font-size:14px;
+	font-size:13px;
 	line-height:30px;
 }
 .panel .p-items .item .inputbox .inputleft {
 	display:block;
 }
-.panel .p-items .item .inputbox #inp-select {
+.panel .p-items .item .inputbox #type-select,#unit-select {
 	width:250px;
-	height:34px;
+	height:30px;
 	padding:3px 12px;
 	font-size:13px;
 }
 .panel .p-items .item .inputbox .inputright {
 	width:315px;
-	height:25px;
+	height:22px;
 	padding:3px 8px;
 	border:1px solid #ddd;
 }
@@ -138,6 +149,17 @@ body {
 	float:left;
 	font-size:14px;
 	margin-left:15px;
+}
+.p-items .item .downbox input[type="radio"]{
+	width:16px;
+	height:16px;
+	vertical-align: middle;
+}
+.p-items .item .downbox .downtext {
+	height:30px;
+	width:80px;
+	display:inline-block;
+	padding-left:5px;
 }
 .panel .p-items .item .downbox .downtype {
 	width:30px;
@@ -160,7 +182,7 @@ body {
 	float:left;
 }
 
-.panel .p-items .p-button .button {
+.panel .button {
 	width:120px;
 	height:40px;
 	line-height:40px;
@@ -168,21 +190,17 @@ body {
 	text-align:center;
 	display:block;
 	background:#1CBD9D;
-
+	float:left;
+	margin-right:10px;
+}
+.panel #saveBtn {
+	height:100px;
 }
 </style>
 </head>
 
 <body>
 	<%@include file="../../../header.jsp"%>
-	<%
-		List<GoodsType> typs = new ArrayList<GoodsType>();
-		typs = (List<GoodsType>) request.getAttribute("types");
-		pageContext.setAttribute("typs", typs);
-		List<Unit> units = new ArrayList<Unit>();
-		units = (List<Unit>) request.getAttribute("units");
-		pageContext.setAttribute("units", units);
-	%>
 	<!-- 后台导航 开始 -->
 	<div class="nav"> 
 		<div class="nav-box">
@@ -198,14 +216,17 @@ body {
 	<!-- 后台导航 结束 -->
 	<!-- 后台首页展示区 -->
 	<div class="panel">
-		<div class="p-title fs18"><span class="iconfont">&#xe654;</span> 添加商品</div>
+		<div id="gnewbtn">
+			<a href="javascript:void greset();" class="button fs16">添加商品</a>
+		</div>
 		<div class="p-items">
-			<div class="i-title">商品信息</div>
+			<div class="i-title  fs18">商品信息</div>
 			<div class="item">
 				<div class="inputbox">
+					<input type="hidden" value="${goods.id }" id="gid">
 					<label class="inputleft">
 						<i class="opt-name">(必选)-类别：</i>
-						<select  id="inp-select">
+						<select  id="type-select">
 							<option value="0">--请选择--</option>
 							<c:forEach items="${types }" var="type">
 								<option value="${type.id}">${type.name }</option>
@@ -243,7 +264,7 @@ body {
 				<div class="inputbox">
 					<label class="inputleft">
 						<i class="opt-name">(必填)-单位：</i>
-						<select  id="inp-select">
+						<select  id="unit-select">
 							<option value="0">--请选择--</option>
 							<c:forEach items="${units }" var="unit">
 								<option value="${unit.id}">${unit.name }</option>
@@ -256,34 +277,23 @@ body {
 				<div class="inputbox" style="width:802px">
 					<label class="inputleft">
 						<i class="opt-name">(必填)-商品描述：</i>
-						<input class="inputright" type="text" id="gdescription">
+						<input class="inputright" type="text" id="gdescription" value="${goods.description }">
 					</label>
 				</div>
 			</div>	
-			<div class="item">
-				<div class="p-button ml130 mr10">
-					<a href="javascript:void create();" class="button">保存商品</a>
-				</div>
-			</div>									
 		</div>
 		<!-- 上传商品图片 开始  -->
 		<div class="p-items">
-			<div class="i-title">上传预览</div>
-			<div class="item">
-				<div class="inputbox">
-					<label class="inputleft">
-						<i class="opt-name">商品图片：</i>
-						<input class="inputright" type="text" id="filename1" value="">
-						<a href="javascript:void(0);"  class="uploadbtn text-def" id="uploadbtn1">上传图片</a>
-					</label>
-				</div>
+			<div class="i-title fs18">上传预览</div>
+			<div class="gimgbox">
+				<img src="${basePath }images/led.png" width="100%" id="gmainimg">
 			</div>
 			<div class="item">
 				<div class="inputbox">
 					<label class="inputleft">
-						<i class="opt-name">商品图片：</i>
-						<input class="inputright" type="text" id="filename2">
-						<a href="javascript:void(0);" class="uploadbtn text-def" id="uploadbtn2">上传图片</a>
+						<i class="opt-name">商品展示主图：</i>
+						<input class="inputright" type="text" id="filename1" value="${goods.img_url1 }">
+						<a href="javascript:void(0);"  class="uploadbtn text-def" id="uploadbtn1">上传图片</a>
 					</label>
 				</div>
 			</div>			
@@ -291,56 +301,44 @@ body {
 		<!-- 上传商品图片 结束 -->
 		<!-- 销售属性 开始  -->
 		<div class="p-items">
-			<div class="i-title">销售属性</div>
+			<div class="i-title fs18">销售属性</div>
 			<div class="item">
 				<i class="opt-name">库存扣减方式：</i>
-				<label class="downbox"><input type="radio" name="downtype"> 预定扣库存</label>
-				<label class="downbox"><input type="radio" name="downtype"> 付款扣库存</label>
+				<label class="downbox"><input type="radio" name="downtype" value="0"  <c:if test="${goods.downtype == 0 || goods.downtype==null }"> checked="checked"</c:if> ><span class="downtext">预定扣库存</span></label>
+				<label class="downbox"><input type="radio" name="downtype"  value="1"  <c:if test="${goods.downtype == 1 }"> checked="checked"</c:if>><span class="downtext">付款扣库存</span></label>
 			</div>
 		</div>		
 		<!-- 销售属性 结束 -->
-		<div class="p-items" >
+		<div class="p-items" id="saveBtn">
 			<div class="i-title">提交信息</div>
 			<div class="p-button ml190">
-				<a href="javascript:void release();" class="button">保存并发布商品</a>
+				<a href="javascript:void gcreate();" class="button fs15">保存商品</a>
+				<!-- <a href="javascript:void grelease();" class="button fs15">保存并发布商品</a> -->
 			</div>			
 		</div>
 	</div>
 <div id="console"></div>
 	<script type="text/javascript">
+		/* 图片1上传 */
 		 $.tzUpload({
 				targetId:"uploadbtn1",
-				url:getRootPath()+"/myupload",
+				url:getRootPath()+"/upload/myupload",
 				size:"10 MB",
-				data:{"dir":"goods"},
+				data:{"dir":"goods","oldFineName":$("#gmainimg").attr("src").replace("goods/")},
 				single:false,
 				callback:function(data){
 					var jdata = eval("("+data+")");
 					if(jdata.success){
-						$("#filename1").attr("value",jdata.url);
+						$("#filename1").attr("value",jdata.result.url);
+						$("#gmainimg").attr("src",getRootPath()+"/resource/"+jdata.result.url);
 					}else{
 						messageBox("很抱谦,文件上传失败!");
 					}
 				}
 			});
-		 $.tzUpload({
-				targetId:"uploadbtn2",
-				url:getRootPath()+"/myupload",
-				size:"10 MB",
-				data:{"dir":"goods"},
-				single:false,
-				callback:function(data){
-					var jdata = eval("("+data+")");
-					if(jdata.success){
-						$("#filename2").attr("value",jdata.url);
-					}else{
-						messageBox("很抱谦,文件上传失败!");
-					}
-				}
-			});	
 		/** 添加商品 */
-		function create(){
-			 var typeId = $("#inp-select").val();
+		function gcreate(){
+			 var typeId = $("#type-select").val();
 			 if(parseInt(typeId) == 0){
 				 messageBox("请选择相应的商品类别!");
 				 return false;
@@ -355,14 +353,48 @@ body {
 				 messageBox("请选择相应的商品单价!");
 				 return false;
 			 }
-			 
-			 alert(price);
-			 
-			 
-			 
-		 }
-
+			 var qty = $("#gqty").val();
+			 if(isNaN(qty) || parseInt(qty) < 0){
+				 messageBox("请选择相应的商品单价!");
+				 return false;
+			 }	
+			 var unitId = $("#unit-select").val();
+			 if(parseInt(unitId) == 0){
+				 messageBox("请选择相应的商品单位!");
+				 return false;
+			 }
+			 var description = $("#gdescription").val();
+			 var mainImg = $("#filename1").val();
+			 var downtype =  $("input:radio[name='downtype']:checked").val();
+			 var params = {
+			 	 "id":$("#gid").val(),
+			 	 "name":name,
+			 	 "typeId":typeId,
+			 	 "price":price,
+			 	 "qty":qty,
+			 	 "description":description,
+			 	 "mainImg":mainImg,
+			 	 "downtype":downtype,
+			 	 "unitId":unitId
+			 };
+			 $.ajax({
+				 url:getRootPath()+"/goods/create",
+				 type:"post",
+				 data:params,
+				 success:function(response){
+					 if(response.success){
+						 messageBox("恭喜您,商品保存成功!");
+					 }else{
+						 messageBox("抱歉,商品保存失败!");
+					 }
+				 }
+			 });
+		 };
 		
+		/* 添加商品 */
+		function greset(){
+			location.reload(true);
+		};
 
    	</script>
 </body>

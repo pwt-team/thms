@@ -1,8 +1,6 @@
 package com.thms.web;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,42 +24,28 @@ import com.thms.util.TmFileUtil;
  * @date 2015年6月20日  上午1:04:11
  */
 @Controller
+@RequestMapping(value="/upload")
 public class UploadController {
 	
 	@Autowired
 	public UserService userService;
 
+	/**
+	 * @Description: 文件上传方法
+	 * @param: @param file
+	 * @param: @param request
+	 * @param: @throws IllegalStateException
+	 * @param: @throws IOException   
+	 * @author:yuanzhong
+	 * @date: 2015年6月23日
+	 */
 	@RequestMapping(value = "/myupload",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> tzupload(@RequestParam("doc") MultipartFile file, HttpServletRequest request)
+	public JsonResult myupload(@RequestParam("doc") MultipartFile file, HttpServletRequest request)
 			throws IllegalStateException, IOException {
-		String directory = request.getParameter("dir");
-		if(StringUtils.isEmpty(directory))directory = "upload";
-		String rootDir = "resource/"+directory;
-		String realPath = request.getServletContext().getRealPath(rootDir);
-		File dirPath = new File(realPath);
-		// 自动创建上传的upload目录
-		if (!dirPath.exists())
-			dirPath.mkdirs();
-		String oldName = file.getOriginalFilename();
-		String oldFileName = request.getParameter("oldName");
-		String ext = TmFileUtil.getExtNoPoint(oldName);
-		String newName = null;
-		if (StringUtils.isNotEmpty(oldFileName)) {
-			newName = TmFileUtil.getNotExtName(oldFileName) + "." + ext;
-		} else {
-			newName = TmFileUtil.generateFileName(oldName, 5, "yyyyMMddHHmmss");
-		}
-		File targetFile = new File(dirPath, newName);
-		file.transferTo(targetFile);// 文件上传
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("name", oldName);// 文件的原始名称
-		map.put("newName", newName);// 文件的新名称
-		map.put("ext", ext);// 文件的后缀
-		map.put("size", file.getSize());// 文件的真实大小
-		map.put("sizeString", TmFileUtil.countFileSize(file.getSize()));// 获取文件转换以后的大写
-		map.put("url", directory+"/" + newName);// 获取文件的具体服务器的目录
-		return map;
+		JsonResult json = new JsonResult(true);
+		json = upload(file, request);
+		return json;
 	}
 	
 	
@@ -84,7 +68,6 @@ public class UploadController {
 		User user  = userService.findUser(uid);
 		if(user != null){
 			json = upload(file, request);
-			System.out.println((String) json.getResult().get("url"));
 			user.setFace((String) json.getResult().get("url"));
 			userService.update(user);
 		}

@@ -1,14 +1,20 @@
 package com.thms.common;
 
-public class Constants {
+public interface Constants {
 	
-	/* 用户状态  */
-	public static final Integer NEW = 0; //新用户,未激活状态
-	public static final Integer ACTIVE = 1; //已激活状态
-	public static final Integer HOLD = 2; //已锁定状态
+	/* 通用状态  */
+	public static final Integer NEW = 0; 			   	   //新生成的,用户里用作未激活状态
+	public static final Integer ACTIVE = 1; 		  	  //已激活状态
+	public static final Integer RELEASED = 2; 		 	 //已发布状态
+	public static final Integer HOLD = 3; 				//已锁定状态
+	public static final Integer CLSD = 4; 			   //已结算
+	
+	
+	
+	public static final Integer COMPLATED = 9; 		  //已完成的
 	public static final Integer DELETED = -1; //已删除状态
 	
-	public static final String LOGIN_KEY = "user"; 
+	public static final String LOGIN_KEY = "user"; //登录用户标识
 	
 	/* 性别  */
 	public static final Integer MAN = 1; //男
@@ -17,8 +23,8 @@ public class Constants {
 	
 	
 	/* 消息类 */
-	public static final String SUCCESS = "success";
-	public static final String FAIL = "fail";
+	public static final String SUCCESS = "success"; //success
+	public static final String FAIL = "fail";       //fail
 	public static final String SUCCESS_TO_CREATED = "恭喜您,添加成功！";
 	public static final String SUCCESS_TO_DELETED = "恭喜您,删除成功！";
 	public static final String SUCCESS_TO_UPDATED = "恭喜您,修改成功！";

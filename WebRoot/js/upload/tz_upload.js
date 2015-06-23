@@ -30,8 +30,8 @@ $.tzUpload = function(options){
 		debug: false,//显示控制台
 		// Button settings
 		button_image_url: opts.img,
-		button_width: 60,
-		button_height: 21,
+		button_width: 81,
+		button_height: 28,
 		button_placeholder_id: opts.targetId,
 		button_text_left_padding: 0,
 		button_text_top_padding: 0,

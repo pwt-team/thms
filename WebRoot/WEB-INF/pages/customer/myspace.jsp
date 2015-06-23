@@ -443,7 +443,7 @@ tr.myhang #fp-typebox .combox-list ul li {
 		var uid = $("#myuid").data("uuid");
 		 $.tzUpload({
 				targetId:"uploadify",
-				url:getRootPath()+"/uploadface",
+				url:getRootPath()+"/upload/uploadface",
 				size:"10 MB",
 				data:{
 					"dir":"user",

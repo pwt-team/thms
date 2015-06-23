@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.thms.common.Constants;
@@ -23,6 +25,8 @@ import com.thms.common.Constants;
 public class GoodsImg implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final Integer MAIN = 1;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +38,10 @@ public class GoodsImg implements Serializable {
 	/** 图片地址 */
 	@Column(name = "IMG_URL_")
 	private String img_url;
+	/** 商品 */
+	@ManyToOne
+	@JoinColumn(name="GOODS_ID_")
+	private Goods goods;
 	/** 主图,默认为0,主图为1 */
 	@Column(name = "COVER_")
 	private Integer cover = Constants.NEW;;
@@ -90,9 +98,11 @@ public class GoodsImg implements Serializable {
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-
-	
-	
-	
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
 
 }

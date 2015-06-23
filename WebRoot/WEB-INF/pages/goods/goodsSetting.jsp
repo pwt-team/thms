@@ -167,14 +167,6 @@ body {
 
 <body>
 	<%@include file="../../../header.jsp"%>
-	<%
-		List<GoodsType> goodsTypes = new ArrayList<GoodsType>();
-		goodsTypes = (List<GoodsType>) request.getAttribute("goodsTypes");
-		pageContext.setAttribute("goodsTypes", goodsTypes);
-		List<Unit> units = new ArrayList<Unit>();
-		units = (List<Unit>) request.getAttribute("units");
-		pageContext.setAttribute("units", units);
-	%>
 	<!-- 后台导航 开始 -->
 	<div class="nav">
 		<div class="nav-box">

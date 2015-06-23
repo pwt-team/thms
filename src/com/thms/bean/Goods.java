@@ -66,7 +66,7 @@ public class Goods implements Serializable{
 	@Column(name = "HOT_")
 	private Integer hot = Constants.NEW;
 	/** 状态 */
-	@Column(name = "STATUS_", length = 1)
+	@Column(name = "STATUS_")
 	private Integer status = Constants.NEW;
 	/** 删除标识 */
 	@Column(name = "ISDELETE_", length = 1)
@@ -75,6 +75,9 @@ public class Goods implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="ATTACH_ID_")
 	private GoodsAttach goods_attach;
+	/** 库存扣减方式 */
+	@Column(name="DOWNTYPE_",length=1)
+	private Integer downtype = Constants.NEW;
 	/** 创建时间 */
 	@Column(name = "CREATEDTIME_")
 	private Date createdTime;	
@@ -178,6 +181,12 @@ public class Goods implements Serializable{
 	}
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
+	}
+	public Integer getDowntype() {
+		return downtype;
+	}
+	public void setDowntype(Integer downtype) {
+		this.downtype = downtype;
 	}	
 	
 
