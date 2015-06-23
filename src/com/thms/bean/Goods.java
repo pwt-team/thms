@@ -58,7 +58,7 @@ public class Goods implements Serializable{
 	private Integer quantity;
 	/** 折扣 */
 	@Column(name="DISCOUNT_")
-	private Float discount;
+	private Float discount = 1f;
 	/** 备注 */
 	@Column(name = "REMARK_")
 	private String remark;

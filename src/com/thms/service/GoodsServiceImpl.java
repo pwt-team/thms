@@ -29,4 +29,9 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.update(goods);
 	}
 
+	@Override
+	public int findSize() {
+		return goodsDao.findSize();
+	}
+
 }

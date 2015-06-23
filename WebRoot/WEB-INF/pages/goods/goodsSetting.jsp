@@ -1,5 +1,3 @@
-<%@page import="com.thms.bean.Unit"%>
-<%@page import="com.thms.bean.GoodsType"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>

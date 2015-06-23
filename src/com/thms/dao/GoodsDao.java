@@ -38,6 +38,11 @@ public class GoodsDao extends BaseDao<Goods, Long> {
 		return goods;
 	}
 
+	public int findSize() {
+		String hql = "select count(1) from Goods";
+		return ((Long) getSession().createQuery(hql).uniqueResult()).intValue();
+	}
+
 	
 	
 	

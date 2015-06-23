@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.thms.common.Constants;
+
 public class YzUtil {
 	
 	
@@ -296,6 +298,33 @@ public class YzUtil {
 			}
     	}
     	return null;
+    }
+    
+    /**
+     * @Description: 格式化数字长度,不足位数自动补0
+     * @param:  code
+     * @author: yuanzhong
+     * @date: 2015年6月24日
+     */
+    public static String formatCode(Object code){
+    	if(code == null) return null;
+        // 正则 %0nd%   
+        return String.format("%0"+Constants.CODE_NO_LENGTH+"d", code);      
+    }
+    
+    /**
+     * @Description: 根据指定长度格式化数字长度,不足位补0
+     * @param:  code
+     * @param:  length
+     * @param: @return   
+     * @author: yuanzhong
+     * @date: 2015年6月24日
+     */
+    public static String formatCode(Object code,Integer length){
+    	if(code == null) return null;
+    	if(length == null || length == 0) length = Constants.CODE_NO_LENGTH;
+        // 正则 %0nd%   
+        return String.format("%0"+length+"d", code);      
     }
     
 }

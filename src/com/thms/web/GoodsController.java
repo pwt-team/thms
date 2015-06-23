@@ -21,6 +21,7 @@ import com.thms.service.GoodsService;
 import com.thms.service.GoodsTypeService;
 import com.thms.service.UnitService;
 import com.thms.util.JsonResult;
+import com.thms.util.YzUtil;
 /**
  * ClassName: GoodsController 
  * @Description: 商品控制器
@@ -41,7 +42,7 @@ public class GoodsController {
 	
 	/**
 	 * @Description: 刷新/转向商品添加页面
-	 * @param: @param id
+	 * @param:  id
 	 * @param: @return   
 	 * @author: yuanzhong
 	 * @date: 2015年6月23日
@@ -58,7 +59,6 @@ public class GoodsController {
 				mv.addObject(goodsImg);
 			}
 		}
-		
 		//组装商品类别
 		List<GoodsType> types = goodsTypeService.findAll();
 		mv.addObject("types",types);
@@ -112,22 +112,26 @@ public class GoodsController {
 		goods.setDescription(description);
 		goods.setPrice(price);
 		goods.setQuantity(qty);
-		GoodsImg goodsImg = null;
 		if(goods.getId() == null){
 			goods = goodsService.create(goods);
+			//设置编码
+			int size = goodsService.findSize() + 1;
+			goods.setCode(Constants.PREFIX_GOODS + YzUtil.formatCode(size));
+			goods = goodsService.update(goods);
+			//添加商品展未图
 			if(StringUtils.isNotEmpty(mainImg)){
-				goodsImg = editMainImg(goods,mainImg);
+				editMainImg(goods,mainImg);
 			}
 			json.msg(Constants.SUCCESS_TO_CREATED);
 		}else{
 			goods = goodsService.update(goods);
+			//更新商品展未图
 			if(StringUtils.isNotEmpty(mainImg)){
-				goodsImg = editMainImg(goods,mainImg);
+				editMainImg(goods,mainImg);
 			}
 			json.msg(Constants.SUCCESS_TO_CREATED);	
 		}
 		json.put("goods", goods);
-		json.put("goodsImg",goodsImg);
 		return json;
 	}
 

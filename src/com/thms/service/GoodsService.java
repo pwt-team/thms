@@ -34,4 +34,13 @@ public interface GoodsService {
 	 */
 	public Goods update(Goods goods);
 
+	/**
+	 * @Description: 获取商品总数
+	 * @param: @return   
+	 * @throws
+	 * @author: yuanzhong
+	 * @date: 2015年6月24日
+	 */
+	public int findSize();
+
 }

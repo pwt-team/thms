@@ -1,6 +1,3 @@
-<%@page import="com.thms.bean.Goods"%>
-<%@page import="com.thms.bean.Unit"%>
-<%@page import="com.thms.bean.GoodsType"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
@@ -229,7 +226,7 @@ body {
 						<select  id="type-select">
 							<option value="0">--请选择--</option>
 							<c:forEach items="${types }" var="type">
-								<option value="${type.id}">${type.name }</option>
+								<option <c:if test='${goods.goodsType.id == type.id}'>selected="selected"</c:if> value="${type.id}">${type.name }</option>
 							</c:forEach>
 						</select>
 					</label>
@@ -240,7 +237,7 @@ body {
 					<input type="text" hidden="hidden" id="gid">
 					<label class="inputleft">
 					<i class="opt-name">(必填)-名称：</i>
-						<input class="inputright" type="text" id="gname">
+						<input class="inputright" type="text" id="gname"  value="${goods.name }">
 					</label>
 				</div>
 			</div>		
@@ -248,7 +245,7 @@ body {
 				<div class="inputbox">
 					<label class="inputleft">
 					<i class="opt-name">(必填)-单价(RMB)：</i>
-						<input class="inputright" type="text" id="gprice">
+						<input class="inputright" type="text" id="gprice" value="${goods.price }">
 					</label>
 				</div>
 			</div>					
@@ -256,7 +253,7 @@ body {
 				<div class="inputbox">
 					<label class="inputleft">
 						<i class="opt-name">(必填)-数量：</i>
-						<input class="inputright" type="text" id="gqty">
+						<input class="inputright" type="text" id="gqty" value="${goods.quantity }">
 					</label>
 				</div>
 			</div>	
@@ -267,7 +264,7 @@ body {
 						<select  id="unit-select">
 							<option value="0">--请选择--</option>
 							<c:forEach items="${units }" var="unit">
-								<option value="${unit.id}">${unit.name }</option>
+								<option <c:if test='${goods.unit.id == unit.id}'>selected="selected"</c:if> value="${unit.id}">${unit.name }</option>
 							</c:forEach>
 						</select>
 					</label>
@@ -286,13 +283,16 @@ body {
 		<div class="p-items">
 			<div class="i-title fs18">上传预览</div>
 			<div class="gimgbox">
-				<img src="${basePath }images/led.png" width="100%" id="gmainimg">
+				<img src="<c:choose>
+							<c:when test="${goodsImg.cover == 1}">../resource/${goodsImg.img_url }</c:when>
+							<c:otherwise>../images/led.png</c:otherwise>
+						</c:choose>" width="100%" id="gmainimg">
 			</div>
 			<div class="item">
 				<div class="inputbox">
 					<label class="inputleft">
 						<i class="opt-name">商品展示主图：</i>
-						<input class="inputright" type="text" id="filename1" value="${goods.img_url1 }">
+						<input class="inputright" type="text" id="filename1" value="<c:if  test="${goodsImg.cover ==1 }">${goodsImg.img_url } </c:if> ">
 						<a href="javascript:void(0);"  class="uploadbtn text-def" id="uploadbtn1">上传图片</a>
 					</label>
 				</div>
@@ -383,7 +383,7 @@ body {
 				 data:params,
 				 success:function(response){
 					 if(response.success){
-						 messageBox("恭喜您,商品保存成功!");
+						 messageBox("恭喜您,商品保存成功! ( 编码:"+response.result.goods.code+" )");
 					 }else{
 						 messageBox("抱歉,商品保存失败!");
 					 }

@@ -42,4 +42,10 @@ public interface Constants {
 	
 	/* 网站名称 */
 	public static final String SITENAME = "惠宇茶社";
+	
+	
+	/* 编码类 */
+	public static final Integer CODE_NO_LENGTH = 9; //编码位长度(格式:1位前缀 + 9位流水) 
+	public static final String PREFIX_GOODS = "G"; //商品
+	
 }
