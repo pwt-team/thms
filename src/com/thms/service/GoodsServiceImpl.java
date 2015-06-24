@@ -1,5 +1,7 @@
 package com.thms.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,16 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public int findSize() {
 		return goodsDao.findSize();
+	}
+
+	@Override
+	public List<Goods> findAll() {
+		return goodsDao.findAll();
+	}
+
+	@Override
+	public List<Goods> findGoods(Integer pageNo, Integer psize) {
+		return goodsDao.findGoods(pageNo,psize);
 	}
 
 }

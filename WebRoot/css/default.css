@@ -210,6 +210,11 @@ div,input[type="text"],input[type="password"] {
 	padding-left: 40px;
 }
 
+
+.pointer {
+	cursor:ponter;
+}
+
 /* ----------------------µÇÂ¼¿ò²¿·Öcss---------------------------------------------- */
 #mask {
 	width: 100%;

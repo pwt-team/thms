@@ -163,8 +163,52 @@ public class GoodsController {
 		return null;
 	}
 
+	/**
+	 * @Description: 刷新/转向查询商品页面
+	 * @param: @param id
+	 * @param: @return   
+	 * @throws
+	 * @author:yuanzhong
+	 * @date: 2015年6月24日
+	 */
 	@RequestMapping(value="/edit")
-	public String edit(){
-		return "goods/goodsEdit";
+	public ModelAndView edit(@RequestParam (required =false) Integer id){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("goods/goodsEdit");
+		Goods goods = goodsService.findGoods(id);
+		if(goods != null){
+			mv.addObject(goods);
+		}else{
+			List<Goods> goodss = goodsService.findAll();
+			mv.addObject("goodss", goodss);
+		}
+		//组装商品totalCount
+		int totalCount = goodsService.findSize();
+		mv.addObject("totalCount", totalCount);
+		//组装默认pageSize
+		mv.addObject("pageSize", Constants.PAGESIZE);
+		return mv;
 	}
+	
+	
+	/**
+	 * @Description: 查询商品的方法
+	 * @param: @param pageNo
+	 * @param: @param psize
+	 * @param: @return   
+	 * @throws
+	 * @author: yuanzhong
+	 * @date: 2015年6月24日
+	 */
+	@RequestMapping(value="/list")
+	@ResponseBody
+	public JsonResult list(
+			@RequestParam (required=false) Integer pageNo,
+			@RequestParam (required = false) Integer psize){
+		JsonResult json = new JsonResult(true);
+		List<Goods> goodss = goodsService.findGoods(pageNo,psize);
+		return json.put("goodss", goodss);
+	}
+	
+	
 }

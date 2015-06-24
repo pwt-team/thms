@@ -1,8 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>惠宇茶舍 - 管理商品</title>
+<title>惠宇茶舍 - 查询商品</title>
 <meta name="pragma" content="no-cache">
 <meta name="cache-control" content="no-cache">
 <meta name="expires" content="0">
@@ -121,7 +122,7 @@ body {
 	background:#f3f3f3;
 }
 .panel .p-items table tr {
-	height:50px;
+	height:35px;
 }
 .panel .p-items table tr:hover  {
 	background:#f3f3f3;
@@ -148,6 +149,8 @@ body {
 .panel .p-items table tr td .goodsname {
 	display:block;
 	cursor:pointer;
+	padding-left:5px;
+	text-align:left;
 }
 .panel .p-items table tr td .operation {
 	display:none;
@@ -157,6 +160,9 @@ body {
 }
 .panel .p-items table tr td .inp-gdshot,.inp-gdsave {
 	display:none;
+}
+.panel .p-items table tbody td{
+	font-size:12px;
 }
 .panel .paging {
 	width:900px;
@@ -177,7 +183,7 @@ body {
 				<li class="bg-orange"><a href="${basePath }admin/admin.jxp">首页</a></li>
 				<li><a href="javascript:void(0);" class="nav-title active">商品管理</a></li>
 				<li><a href="${basePath }goods/add" class="nav-title">添加商品</a></li>
-				<li><a href="javascript:void(0);" class="nav-title" style="color:orange">添加商品</a></li>
+				<li><a href="javascript:void(0);" class="nav-title" style="color:orange">查询商品</a></li>
 				<li><a href="${basePath }goodset/index" class="nav-title">设置</a></li>
 			</ul>
 		</div>		
@@ -207,146 +213,54 @@ body {
 					<tr>
 						<th style="width:40px;">选择</th>
 						<th style="width:70px">类别</th>
-						<th style="width:350px">名称</th>
+						<th style="width:100px">编码</th>
+						<th style="width:250px">名称</th>
 						<th style="width:70px">单价</th>
 						<th style="width:80px">上架数量</th>
-						<th style="width:80px">库存数量</th>
-						<th style="width:50px">状态</th>
-						<th style="width:40px">热点</th>
+						<th style="width:70px">状态</th>
+						<th style="width:50px">热点</th>
+						<th style="width:150px">创建日期</th>
 						<th style="width:150px">操作</th>
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${goodss}" var ="goods" varStatus="index"> 
 					<tr>
 						<td><input type="checkbox"></td>
-						<td>茶房</td>
-						<td><div class="goodsname">名称</div></td>
-						<td>877</td>
-						<td>121</td>
-						<td>2323</td>
-						<td>正常</td>
+						<td>${goods.goodsType.name }</td>
+						<td>${goods.code }</td>
+						<td><div class="goodsname">${goods.name }</div></td>
+						<td><fmt:formatNumber  value="${goods.price }" pattern="#.00" /></td>
+						<td>${goods.quantity }</td>
 						<td>
-							<div class="gdshot" >11</div>
-							<input type="number" value="11" class="inp-gdshot" >
-							<input type="button" value="保存" class="inp-gdsave">
+							<c:choose>
+								<c:when test="${goods.status == 0}">新订单</c:when>
+								<c:when test="${goods.status == 3}">已锁定</c:when>
+								<c:when test="${goods.status == 4}">已结算</c:when>
+								<c:when test="${goods.status == 9}">已完成</c:when>
+							</c:choose> 
 						</td>
 						<td>
+							<div class="gdshot" >${goods.hot }</div>
+							<input type="number" value="${goods.hot }" class="inp-gdshot" >
+							<input type="button" value="保存" class="inp-gdsave">
+						</td>
+						<td><fmt:formatDate value="${goods.createdTime}" type="both" /></td>
+						<td>
 							<div class="operation">
-								<a href="javascript:void(0);" class="iconfont" title="编辑">&#xe64f;</a>
+								<a href="${basePath }goods/add?id=${goods.id}" class="iconfont" title="编辑">&#xe64f;</a>
 								<a href="javascript:void(0);" class="iconfont" title="下架">&#xe64f;</a>
 								<a href="javascript:void(0);" class="iconfont" title="删除">&#xe693;</a>	
 							</div>		
 						</td>
 					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>茶房</td>
-						<td><div class="goodsname">名称</div></td>
-						<td>877</td>
-						<td>121</td>
-						<td>2323</td>
-						<td>正常</td>
-						<td>
-							<div class="gdshot" >11</div>
-							<input type="number" value="11" class="inp-gdshot" >
-							<input type="button" value="保存" class="inp-gdsave">
-						</td>
-						<td>
-							<div class="operation">
-								<a href="javascript:void(0);" class="iconfont" title="编辑">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="下架">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="删除">&#xe693;</a>	
-							</div>						
-						</td>
-					</tr>	
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>茶房</td>
-						<td><div class="goodsname">名称</div></td>
-						<td>877</td>
-						<td>121</td>
-						<td>2323</td>
-						<td>正常</td>
-						<td>
-							<div class="gdshot" >11</div>
-							<input type="number" value="11" class="inp-gdshot" >
-							<input type="button" value="保存" class="inp-gdsave">
-						</td>
-						<td>
-							<div class="operation">
-								<a href="javascript:void(0);" class="iconfont" title="编辑">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="下架">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="删除">&#xe693;</a>	
-							</div>						
-						</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>茶房</td>
-						<td><div class="goodsname">名称</div></td>
-						<td>877</td>
-						<td>121</td>
-						<td>2323</td>
-						<td>正常</td>
-						<td>
-							<div class="gdshot" >11</div>
-							<input type="number" value="11" class="inp-gdshot" >
-							<input type="button" value="保存" class="inp-gdsave">
-						</td>
-						<td>
-							<div class="operation">
-								<a href="javascript:void(0);" class="iconfont" title="编辑">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="下架">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="删除">&#xe693;</a>	
-							</div>							
-						</td>						
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>茶房</td>
-						<td><div class="goodsname">名称</div></td>
-						<td>877</td>
-						<td>121</td>
-						<td>2323</td>
-						<td>正常</td>
-						<td>
-							<div class="gdshot" >11</div>
-							<input type="number" value="11" class="inp-gdshot" >
-							<input type="button" value="保存" class="inp-gdsave">
-						</td>
-						<td>
-							<div class="operation">
-								<a href="javascript:void(0);" class="iconfont" title="编辑">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="下架">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="删除">&#xe693;</a>	
-							</div>							
-						</td>						
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>茶房</td>
-						<td><div class="goodsname">名称</div></td>
-						<td>877</td>
-						<td>121</td>
-						<td>2323</td>
-						<td>正常</td>
-						<td>
-							<div class="gdshot" >11</div>
-							<input type="number" value="11" class="inp-gdshot" >
-							<input type="button" value="保存" class="inp-gdsave">
-						</td>
-						<td>
-							<div class="operation">
-								<a href="javascript:void(0);" class="iconfont" title="编辑">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="下架">&#xe64f;</a>
-								<a href="javascript:void(0);" class="iconfont" title="删除">&#xe693;</a>	
-							</div>						
-						</td>
-					</tr>														
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 		<div class="paging">
+			<input type="hidden" id="totalCount" value="${totalCount }">
+			<input type="hidden" id="pageSize" value="${pageSize }">
 			<div id="tzPage"></div>
 		</div>
 		<div id="tzDialog"></div>
@@ -354,22 +268,47 @@ body {
 	
 
 	<script type="text/javascript">
-	
-	//$(function(){
-		$("#tzPage").tzPage(100, {
-			num_edge_entries : 1, //边缘页数
-			num_display_entries :2, //主体页数
-			num_edge_entries:2,
-			current_page:0,
-			showGo:false,
-			showSelect:false,
-			items_per_page : 2, //每页显示X项
-			prev_text : "前一页",
-			next_text : "后一页",
-			callback : function(pageNo,psize){
-				//tz_loadingTemplate(1,10);
-			}
+		var totalCount = $("#totalCount").val();
+		var pageSize = $("#pageSize").val();
+		$(function(){
+			if(!totalCount) totalCount =25;
+			tm_init_page(totalCount);
 		});
+		/* 初始化分页 */
+		function tm_init_page(totalCount){
+			$("#tzPage").tzPage(totalCount, {
+				num_edge_entries : 1, //边缘页数
+				num_display_entries :2, //主体页数
+				num_edge_entries:2,
+				current_page:0,
+				showGo:true,
+				showSelect:true,
+				items_per_page : pageSize, //每页显示X项
+				prev_text : "前一页",
+				next_text : "后一页",
+				callback : function(pageNo,psize){
+					alert(pageNo+"---------"+psize);
+					$.ajax({
+						url:getRootPath()+"/goods/list",
+						data:{
+							"pageNo":pageNo,
+							"psize":psize
+						},
+						success:function(response){
+							console.log(response);
+							if(response.success){
+								alert(messageBox("查询成功！"));
+							}
+						}
+						
+					});
+				}
+			});
+		};
+		
+		
+		
+		
 		
 		$(".goodsname").on("click",function(){
 			window.location.href = "${basePath}goods/add.jxp";

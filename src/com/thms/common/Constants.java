@@ -29,11 +29,8 @@ public interface Constants {
 	public static final String SUCCESS_TO_DELETED = "恭喜您,删除成功！";
 	public static final String SUCCESS_TO_UPDATED = "恭喜您,修改成功！";
 	public static final String SUCCESS_TO_ACTVED = "恭喜您,激活成功！";
-	
 	public static final String SUCCESS_TO_EMAIL_SEND = "恭喜您,邮件发送成功！";
-	
 	public static final String PENDING_TO_EXIST = "已存在,请确认后重试！";
-	
 	public static final String ERROR_TO_FAIL = "抱歉,操作失败！";
 	
 	
@@ -43,6 +40,8 @@ public interface Constants {
 	/* 网站名称 */
 	public static final String SITENAME = "惠宇茶社";
 	
+	/* 默认分页参数 */
+	public static final Integer PAGESIZE = 10;  //每页显示数量
 	
 	/* 编码类 */
 	public static final Integer CODE_NO_LENGTH = 9; //编码位长度(格式:1位前缀 + 9位流水) 

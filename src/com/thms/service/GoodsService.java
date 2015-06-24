@@ -1,5 +1,7 @@
 package com.thms.service;
 
+import java.util.List;
+
 import com.thms.bean.Goods;
 
 public interface GoodsService {
@@ -42,5 +44,25 @@ public interface GoodsService {
 	 * @date: 2015年6月24日
 	 */
 	public int findSize();
+
+	/**
+	 * @Description: 查询所有商品信息(按默认分页,降序)
+	 * @param: @return   
+	 * @throws
+	 * @author: yuanzhong
+	 * @date: 2015年6月24日
+	 */
+	public List<Goods> findAll();
+
+	/**
+	 * @Description: 分页查询商品信息
+	 * @param: @param pageNo
+	 * @param: @param psize
+	 * @param: @return   
+	 * @throws
+	 * @author:yuanzhong
+	 * @date: 2015年6月24日
+	 */
+	public List<Goods> findGoods(Integer pageNo, Integer psize);
 
 }

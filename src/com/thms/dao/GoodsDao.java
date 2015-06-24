@@ -1,12 +1,14 @@
 package com.thms.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.thms.bean.Goods;
+import com.thms.common.Constants;
 import com.thms.dao.update.BaseDao;
 /**
  * ClassName: GoodsDao 
@@ -41,6 +43,24 @@ public class GoodsDao extends BaseDao<Goods, Long> {
 	public int findSize() {
 		String hql = "select count(1) from Goods";
 		return ((Long) getSession().createQuery(hql).uniqueResult()).intValue();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> findAll() {
+		String hql = "select g from Goods g where isDelete is not ? order by createdTime desc";
+		return getSession().createQuery(hql)
+				.setParameter(0, Constants.DELETED)
+				.setFirstResult(0).setMaxResults(Constants.PAGESIZE)
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> findGoods(Integer pageNo, Integer psize) {
+		String hql = "select g from Goods g where isDelete is not ? order by createdTime desc";
+		return getSession().createQuery(hql)
+				.setParameter(0, Constants.DELETED)
+				.setFirstResult(pageNo * psize).setMaxResults(psize)
+				.list();
 	}
 
 	
