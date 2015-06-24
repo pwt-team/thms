@@ -195,15 +195,12 @@ body {
 		<div class="p-top">
 			<div class="searchtype">
 				<label>类型：<select id="goodstype">
-					<option value="1">全部</option>
-					<option value="2">茶房</option>
-					<option value="3">茶叶</option>
-					<option value="4">茶具</option>
-					<option value="5">字画</option>
+					<option value="0">全部</option>
+					<c:forEach items="${types }" var="type"><option value="${type.id }">${type.name }</option></c:forEach>
 				</select></label>
 			</div>
 			<div class="searchbox">
-				<input type="text" id="searchinp" name="searchinp"><a href="javascript:void(0);" class="iconfont" id="searchgo">&#xe65b;<span> 搜索</span></a>
+				<input type="text" id="searchinp" name="searchinp"><a href="javascript:void search(this);" class="iconfont" id="searchgo">&#xe65b;<span> 搜索</span></a>
 			</div>
 		</div>
 		<!-- 列表部分 -->
@@ -223,7 +220,7 @@ body {
 						<th style="width:150px">操作</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="gbody">
 					<c:forEach items="${goodss}" var ="goods" varStatus="index"> 
 					<tr>
 						<td><input type="checkbox"></td>
@@ -287,7 +284,6 @@ body {
 				prev_text : "前一页",
 				next_text : "后一页",
 				callback : function(pageNo,psize){
-					alert(pageNo+"---------"+psize);
 					$.ajax({
 						url:getRootPath()+"/goods/list",
 						data:{
@@ -297,7 +293,8 @@ body {
 						success:function(response){
 							console.log(response);
 							if(response.success){
-								alert(messageBox("查询成功！"));
+								var data = response.result.goodss;
+								template(data);
 							}
 						}
 						
@@ -306,7 +303,66 @@ body {
 			});
 		};
 		
+		/* 商品列表模板 */
+		function template(data){
+			var gbody = $("#gbody");
+			gbody.html('');
+			var html = "";
+			var length = data.length;
+			for(var i = 0 ; i < length ; i++){
+				html += "<tr>"+
+					    "	<td><input type='checkbox'></td>"+
+						"	<td>"+data[i].type+"</td>"+
+						"	<td>"+data[i].code+"</td>"+
+						"	<td><div class='goodsname'>"+data[i].name+"</div></td>"+
+						"	<td>"+data[i].price+"</td>"+
+						"	<td>"+data[i].quantity+"</td>"+
+						"	<td>"+data[i].status+"</td>"+
+						"	<td>"+
+						"		<div class='gdshot' >"+data[i].hot+"</div>"+
+						"		<input type='number' value="+data[i].hot+" class='inp-gdshot' >"+
+						"		<input type='button' value='保存' class='inp-gdsave'>"+
+						"	</td>"+
+						"	<td>"+data[i].createdTime+"</td>"+
+						"	<td>"+
+						"		<div class='operation'>"+
+						"			<a href='${basePath }goods/add?id='"+data[i].id+" class='iconfont' title='编辑'>&#xe64f;</a>"+
+						"			<a href='javascript:void(0);' class='iconfont' title='下架'>&#xe64f;</a>"+
+						"			<a href='javascript:void(0);' class='iconfont' title='删除'>&#xe693;</a>	"+
+						"		</div>"+		
+						"	</td>"+
+						"</tr>";
+				
+				
+			}
+			gbody.html(html);
+		};
 		
+		/* 条件搜索 */
+		function search(obj){
+			var type = $("#goodstype").val();
+			var name = $("#searchinp").val();
+			if(isEmpty(type) && isEmpty(name)){
+				messageBox("您好,请输入搜索条件!");
+				return false;
+			};
+			$.ajax({
+				url:getRootPath()+"/goods/search",
+				data:{
+					"type":type,
+					"name":name
+				},
+				success:function(response){
+					console.log(response);
+					if(response.success){
+						var data = response.result.goodss;
+						template(data);
+					}	
+				}
+				
+			});
+			
+		}
 		
 		
 		

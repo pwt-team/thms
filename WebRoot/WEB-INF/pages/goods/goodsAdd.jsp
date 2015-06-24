@@ -205,7 +205,7 @@ body {
 				<li class="bg-orange"><a href="${basePath }admin/admin.jxp">首页</a></li>
 				<li><a href="javascript:void(0);" class="nav-title active">商品管理</a></li>
 				<li><a href="javascript:void(0);" class="nav-title" style="color:orange">添加商品</a></li>
-				<li><a href="${basePath }goods/edit" class="nav-title">编辑商品</a></li>
+				<li><a href="${basePath }goods/edit" class="nav-title">查询商品</a></li>
 				<li><a href="${basePath }goodset/index" class="nav-title">设置</a></li>
 			</ul>
 		</div>		

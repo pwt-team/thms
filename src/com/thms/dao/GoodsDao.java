@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.thms.bean.Goods;
@@ -61,6 +62,26 @@ public class GoodsDao extends BaseDao<Goods, Long> {
 				.setParameter(0, Constants.DELETED)
 				.setFirstResult(pageNo * psize).setMaxResults(psize)
 				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> findGoods(Integer typeId, String name, Integer pageNo,
+			Integer psize) {
+		StringBuffer hql = new StringBuffer();
+		hql.append("from Goods where ");
+		if(typeId != null){
+			hql.append(" goodsType = " + typeId +" and " );
+		}
+		if(StringUtils.isNotEmpty(name)){
+			hql.append(" name like  %" + name + "%  and ");
+		}
+		hql.append(" status is not ? order by createdTime desc ");
+		
+		return getSession().createQuery(hql.toString())
+					.setParameter(0, Constants.DELETED)
+					.setFirstResult(pageNo == null ? 0 : pageNo)
+					.setMaxResults(psize == null ? Constants.PAGESIZE : psize)
+					.list();
 	}
 
 	

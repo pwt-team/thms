@@ -1,6 +1,11 @@
 package com.thms.web;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,6 +187,9 @@ public class GoodsController {
 			List<Goods> goodss = goodsService.findAll();
 			mv.addObject("goodss", goodss);
 		}
+		//组装商品类别
+		List<GoodsType> types = goodsTypeService.findAll();
+		mv.addObject("types",types);
 		//组装商品totalCount
 		int totalCount = goodsService.findSize();
 		mv.addObject("totalCount", totalCount);
@@ -207,7 +215,86 @@ public class GoodsController {
 			@RequestParam (required = false) Integer psize){
 		JsonResult json = new JsonResult(true);
 		List<Goods> goodss = goodsService.findGoods(pageNo,psize);
-		return json.put("goodss", goodss);
+		List<Map<String, Object>> list = null;
+		if(goodss != null && goodss.size() > 0){
+			list = new ArrayList<Map<String,Object>>();
+			for (Goods goods: goodss) {
+				//组装成list
+				list.add(addMap(goods));
+			}
+		}
+		return json.put("goodss", list);
+	}
+	
+	/**
+	 * @Description: 根据条件搜索商品信息
+	 * @param: @param pageNo
+	 * @param: @param psize
+	 * @param: @param typeId
+	 * @param: @param name
+	 * @param: @return   
+	 * @throws
+	 * @author: yuanzhong
+	 * @date: 2015年6月25日
+	 */
+	@RequestMapping(value="/search")
+	@ResponseBody
+	public JsonResult search(
+			@RequestParam (required=false) Integer pageNo,
+			@RequestParam (required = false) Integer psize,
+			@RequestParam (required = false) Integer typeId,
+			@RequestParam (required = false) String name){
+		JsonResult json = new JsonResult(true);
+		List<Goods> goodss = goodsService.findGoods(typeId,name,pageNo,psize);
+		List<Map<String, Object>> list = null;
+		if(goodss != null && goodss.size() > 0){
+			list = new ArrayList<Map<String,Object>>();
+			for (Goods goods: goodss) {
+				//组装成list
+				list.add(addMap(goods));
+			}
+		}
+		return json.put("goodss", list);
+	}
+	
+	
+	
+	
+	/**
+	 * @Description: 将商品信息组装成map
+	 * @param: @param goods
+	 * @param: @return   
+	 * @throws
+	 * @author: yuanzhong
+	 * @date: 2015年6月25日
+	 */
+	public Map<String, Object> addMap(Goods goods){
+		if(goods == null) return null;
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("id", goods.getId());
+		map.put("code", goods.getCode());
+		map.put("name", goods.getName());
+		map.put("price", new DecimalFormat("#.00").format(goods.getPrice()));
+		map.put("quantity", goods.getQuantity());
+		map.put("type", goods.getGoodsType().getName());
+		map.put("hot", goods.getHot());
+		Integer status = goods.getStatus();
+		switch (status) {
+		case 0:
+			map.put("status", "正常");
+			break;
+		case 3:
+			map.put("status", "锁定");
+			break;
+		case 4:
+			map.put("status", "已结算");
+			break;	
+		case 9:
+			map.put("status", "已完成");
+			break;					
+		}
+		map.put("createdTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:SS").format(goods.getCreatedTime()));
+		return map;
 	}
 	
 	

@@ -46,4 +46,10 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.findGoods(pageNo,psize);
 	}
 
+	@Override
+	public List<Goods> findGoods(Integer typeId, String name, Integer pageNo,
+			Integer psize) {
+		return goodsDao.findGoods(typeId,name,pageNo,psize);
+	}
+
 }

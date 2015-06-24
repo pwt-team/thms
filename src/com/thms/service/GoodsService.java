@@ -65,4 +65,18 @@ public interface GoodsService {
 	 */
 	public List<Goods> findGoods(Integer pageNo, Integer psize);
 
+	/**
+	 * @Description: 根据类型或名称模糊查询商品
+	 * @param: @param typeId
+	 * @param: @param name
+	 * @param: @param pageNo
+	 * @param: @param psize
+	 * @param: @return   
+	 * @throws
+	 * @author:yuanzhong
+	 * @date: 2015年6月25日
+	 */
+	public List<Goods> findGoods(Integer typeId, String name, Integer pageNo,
+			Integer psize);
+
 }
