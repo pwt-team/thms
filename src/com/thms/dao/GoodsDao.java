@@ -68,12 +68,12 @@ public class GoodsDao extends BaseDao<Goods, Long> {
 	public List<Goods> findGoods(Integer typeId, String name, Integer pageNo,
 			Integer psize) {
 		StringBuffer hql = new StringBuffer();
-		hql.append("from Goods where ");
+		hql.append("select g from Goods g where ");
 		if(typeId != null){
 			hql.append(" goodsType = " + typeId +" and " );
 		}
 		if(StringUtils.isNotEmpty(name)){
-			hql.append(" name like  %" + name + "%  and ");
+			hql.append(" name like  '%" + name + "%'  and ");
 		}
 		hql.append(" status is not ? order by createdTime desc ");
 		

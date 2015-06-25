@@ -231,7 +231,7 @@ body {
 						<td>${goods.quantity }</td>
 						<td>
 							<c:choose>
-								<c:when test="${goods.status == 0}">新订单</c:when>
+								<c:when test="${goods.status == 0}">正常</c:when>
 								<c:when test="${goods.status == 3}">已锁定</c:when>
 								<c:when test="${goods.status == 4}">已结算</c:when>
 								<c:when test="${goods.status == 9}">已完成</c:when>
@@ -349,26 +349,18 @@ body {
 			$.ajax({
 				url:getRootPath()+"/goods/search",
 				data:{
-					"type":type,
+					"typeId":type,
 					"name":name
 				},
 				success:function(response){
-					console.log(response);
 					if(response.success){
 						var data = response.result.goodss;
 						template(data);
 					}	
 				}
-				
 			});
-			
-		}
-		
-		
-		
-		$(".goodsname").on("click",function(){
-			window.location.href = "${basePath}goods/add.jxp";
-		});
+		};
+
 	//});
    	</script>
 </body>
