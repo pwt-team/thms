@@ -73,10 +73,22 @@ public interface GoodsService {
 	 * @param: @param psize
 	 * @param: @return   
 	 * @throws
-	 * @author:yuanzhong
+	 * @author: yuanzhong
 	 * @date: 2015年6月25日
 	 */
 	public List<Goods> findGoods(Integer typeId, String name, Integer pageNo,
 			Integer psize);
+
+	/**
+	 * @param psize 
+	 * @param pageNo 
+	 * @Description: 根据类型查询商品
+	 * @param: @param type
+	 * @param: @return   
+	 * @throws
+	 * @author: yuanzhong
+	 * @date: 2015年6月25日
+	 */
+	public List<Goods> findGoodsByType(Integer type, Integer pageNo, Integer psize);
 
 }

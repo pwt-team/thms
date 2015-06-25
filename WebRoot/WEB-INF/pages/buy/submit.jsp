@@ -122,7 +122,7 @@ body {
 </head>
 
 <body>
-	<%@include file="../../../header.jsp"%>
+	<%@include file="../home/header.jsp"%>
 	<!-- 导航 -->
 	<div class="order-nav">
 		<div class="o-nav-box">
@@ -164,7 +164,7 @@ body {
 			</div>
 		</div>
 	</div>
-	<%@include file="../../../footer.jsp"%>
+	<%@include file="../home/footer.jsp"%>
 
 	<script type="text/javascript">
 

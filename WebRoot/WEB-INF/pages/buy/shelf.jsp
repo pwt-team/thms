@@ -284,7 +284,7 @@
   </head>
   
   <body>  
-    <%@include file="../../../header.jsp" %>
+	<%@include file="../home/header.jsp"%>
     <!-- 导航 -->
     <div class="goods-nav">
     	<div class="g-nav-box">
@@ -501,7 +501,7 @@
     	</div>
    	</div>   
    
-  <%@include file="../../../footer.jsp" %>
+  <%@include file="../home/footer.jsp" %>
    	
    	<script type="text/javascript">
    		$(function(){

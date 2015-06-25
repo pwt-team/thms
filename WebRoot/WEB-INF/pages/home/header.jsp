@@ -1,14 +1,9 @@
-<%@page import="com.thms.bean.Invoice"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@page import="com.thms.bean.User"%>
 <%
-	
 	User user = (User)request.getAttribute("user");
 	pageContext.setAttribute("user", user);
-	List<Invoice> invoices = new ArrayList<Invoice>();
-	invoices = (List<Invoice>)request.getAttribute("invoices");
-	pageContext.setAttribute("invoices", invoices);
 %>
 <style type="text/css">
 .header {
@@ -78,8 +73,8 @@
 	<div class="h-box">
 		<!-- logo图标 -->
 		<div class="logo-box">
-			<a href="${basePath }home.jsp">
-			<img alt="" src="${basePath}images/led.png" width="168px"></a>
+			<a href="${basePath }home/index">
+			<img alt="" src="${basePath}images/led.png" width="120%"></a>
 		</div>
 		<!-- 登录信息 -->
 		<div class="login-box">
@@ -100,7 +95,7 @@
 						</c:when>										
 					</c:choose>
 					<li><a class="leven m-t10"></a></li>
-					<li><a href="${basePath}order/edit.jxp" class="order m-t10">订单中心</a></li>
+					<li><a href="${basePath}order/edit	" class="order m-t10">订单中心</a></li>
 					<li><a href="${basePath}admin/admin.jxp" class="order m-t10">管理中心</a></li>
 					<c:if test="${!empty user.status}">
 						<li><a href="${basePath }logout" class="loginout m-t10">注销</a></li>

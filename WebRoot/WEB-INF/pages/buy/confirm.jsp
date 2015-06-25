@@ -198,7 +198,7 @@ input[type='radio'] {
 </head>
 
 <body>
-	<%@include file="../../../header.jsp"%>
+	<%@include file="../home/header.jsp"%>
 	<!-- 导航 -->
 	<div class="order-nav">
 		<div class="o-nav-box">
@@ -363,7 +363,7 @@ input[type='radio'] {
 			</div>
 		</div>
 	</div>	
-	<%@include file="../../../footer.jsp"%>
+	<%@include file="../home/footer.jsp"%>
 
 	<script type="text/javascript">
 		$("#paysubmit").on("click",function(){

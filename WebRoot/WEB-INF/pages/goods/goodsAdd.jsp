@@ -197,7 +197,7 @@ body {
 </head>
 
 <body>
-	<%@include file="../../../header.jsp"%>
+	<%@include file="../home/header.jsp"%>
 	<!-- 后台导航 开始 -->
 	<div class="nav"> 
 		<div class="nav-box">
@@ -383,6 +383,7 @@ body {
 				 data:params,
 				 success:function(response){
 					 if(response.success){
+						 greset();
 						 messageBox("恭喜您,商品保存成功! ( 编码:"+response.result.goods.code+" )");
 					 }else{
 						 messageBox("抱歉,商品保存失败!");

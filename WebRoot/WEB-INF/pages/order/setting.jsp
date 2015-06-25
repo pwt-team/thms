@@ -158,7 +158,7 @@ body {
 </head>
 
 <body>
-	<%@include file="../../../header.jsp"%>
+	<%@include file="../home/header.jsp"%>
 	<!-- 后台导航 开始 -->
 	<div class="nav">
 		<div class="nav-box">

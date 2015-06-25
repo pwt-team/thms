@@ -120,7 +120,7 @@ body {
 </head>
 
 <body>
-	<%@include file="../../../header.jsp"%>
+	<%@include file="../home/header.jsp"%>
 	<!-- 后台导航 开始 -->
 	<div class="nav">
 		<div class="nav-box">
@@ -153,7 +153,7 @@ body {
 	</div>
 	
 	<!-- 脚部信息  开始 -->
-    <%@include file="../../../footer.jsp" %>
+    <%@include file="../home/footer.jsp" %>
     <!-- 脚部信息  结束 -->
 
 	<script type="text/javascript">

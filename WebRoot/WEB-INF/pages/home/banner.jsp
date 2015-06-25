@@ -61,13 +61,13 @@
 <div class="banner">
 	<div class="b-topline"></div>
 	<div class="b-list">
-		<div class="b-list-item b-1"><img alt="惠宇茶舍" height="350px" src="images/tea1.jpg"></div>
-		<div class="b-list-item b-2"><img alt="惠宇茶舍" height="350px"  src="images/tea2.jpg"></div>
-		<div class="b-list-item b-3"><img alt="惠宇茶舍" height="350px"  src="images/tea3.jpg"></div>
-		<div class="b-list-item b-4"><img alt="惠宇茶舍" height="350px"  src="images/tea4.jpg"></div>
-		<div class="b-list-item b-5"><img alt="惠宇茶舍" height="350px"  src="images/tea5.jpg"></div>
-		<div class="b-list-item b-6"><img alt="惠宇茶舍" height="350px"  src="images/tea6.jpg"></div>
-		<div class="b-list-item b-7"><img alt="惠宇茶舍" height="350px"  src="images/tea7.jpg"></div>
+		<div class="b-list-item b-1"><img alt="惠宇茶舍" height="350px" src="../images/tea1.jpg"></div>
+		<div class="b-list-item b-2"><img alt="惠宇茶舍" height="350px"  src="../images/tea2.jpg"></div>
+		<div class="b-list-item b-3"><img alt="惠宇茶舍" height="350px"  src="../images/tea3.jpg"></div>
+		<div class="b-list-item b-4"><img alt="惠宇茶舍" height="350px"  src="../images/tea4.jpg"></div>
+		<div class="b-list-item b-5"><img alt="惠宇茶舍" height="350px"  src="../images/tea5.jpg"></div>
+		<div class="b-list-item b-6"><img alt="惠宇茶舍" height="350px"  src="../images/tea6.jpg"></div>
+		<div class="b-list-item b-7"><img alt="惠宇茶舍" height="350px"  src="../images/tea7.jpg"></div>
 	</div>
 	<div class="item-pointer">
 		<i class="sel"></i>
@@ -82,11 +82,16 @@
 </div>
 <script type="text/javascript">
 
+	var myInterval;
 	/* banner滑动效果 */
 	$(function() {
+		init_banner(1);
+	});
+	
+	
+	function init_banner(i){
 		var count = $(".b-list-item").length;
-		var i = 1;
-		setInterval(function() {
+		myInterval = setInterval(function() {
 			if (i < count) {
 				var ii = $(".item-pointer").find("i").eq(i);
 				ii.addClass("sel").siblings().removeClass("sel");
@@ -96,6 +101,22 @@
 					i = 0;
 				}
 			}
-		}, 3000);
+		}, 3000);	
+	}
+	
+	/* 处理鼠标滑动效果  */	
+	$(".item-pointer").find("i").mouseover(function(){
+		var idom = $(this);
+		var index = idom.index();
+		clearInterval(myInterval);
+		idom.addClass("sel").siblings().removeClass("sel");
+		$(".b-list-item").eq(index).show().fadeTo('2000', 1).siblings().fadeOut('2000', 0);
+	}).mouseout(function(){
+		var index = $(this).index();
+		init_banner(index);
 	});
+	
+	
+	
+	
 </script>

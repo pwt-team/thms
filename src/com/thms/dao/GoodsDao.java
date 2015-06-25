@@ -76,12 +76,23 @@ public class GoodsDao extends BaseDao<Goods, Long> {
 			hql.append(" name like  '%" + name + "%'  and ");
 		}
 		hql.append(" status is not ? order by createdTime desc ");
-		
 		return getSession().createQuery(hql.toString())
 					.setParameter(0, Constants.DELETED)
 					.setFirstResult(pageNo == null ? 0 : pageNo)
 					.setMaxResults(psize == null ? Constants.PAGESIZE : psize)
 					.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> findGoodsByType(Integer type, Integer pageNo, Integer psize) {
+		if(type == null )return null;
+		String hql = "select g from Goods g where  goodsType.id =  ? and  isDelete is not ? ";
+		return getSession().createQuery(hql)
+							.setParameter(0, type)
+							.setParameter(1, Constants.DELETED)
+							.setFirstResult(pageNo==null ? 0:pageNo)
+							.setMaxResults(psize==null ? Constants.PAGESIZE : psize)
+							.list();
 	}
 
 	

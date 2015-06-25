@@ -52,7 +52,7 @@ public class Goods implements Serializable{
 	private Unit unit;
 	/** 单价 */
 	@Column(name="PRICE_",nullable=false)
-	private Float price;
+	private Float price = 0f;
 	/** 库存 */
 	@Column(name="QUANTITY_",nullable=false)
 	private Integer quantity;

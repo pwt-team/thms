@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <style type="text/css">
 	.content {
 		width:100%;
@@ -52,35 +53,36 @@
 
 	.content .c-seat {
 		width:1000px;
-		height:150px;
+		height:280px;;
 		margin:0 auto;
 		background:#fff;
 	}
 	
 	.content .c-seat .c-s-box {
 		width:990px;
-		height:110px;
-		padding:10px;
+		height:auto;
+		margin:0 auto; 
+		padding:25px 0;
 	}
 	
-	.content .c-seat .c-s-box ul li {
+	.content .c-seat .c-s-box .c-item{
 		list-style:none;
 		float:left;
 		width:235px;
 		height:100px;
-		margin-right:10px;
-		padding-top:10px;
+		margin:5px;
 		border:1px solid #ddd;
 		box-shadow:1px 1px 10px #f0f0f0;
 	}
 	
-	.content .c-seat .c-s-box ul li:hover {
+	.content .c-seat .c-s-box .c-item:hover {
 		border:1px solid #1CBD9D;
 		box-shadow:1px 1px 10px #f0f0f0;
 	}
 	
-	.content .c-seat .c-s-box ul li,a,span {
+	.content .c-seat .c-s-box .c-item a{
 		text-align:center;	
+		display:block;
 		color:#1CBD9D;
 	}
 	.content .c-seat .c-s-box .buy {
@@ -90,13 +92,13 @@
 	.content .business {
 		width:100%;
 		background:#fafafa;
-		height:300px;
+		height:350px;
 		border-top:1px solid #f0f0f0;
 	}
 	
 	.content .business .b-box {
 		width:1000px;
-		height:80px;
+		height:100px;
 		margin:0 auto;
 	}
 	
@@ -121,28 +123,29 @@
 	
 	.content .business .b-box .b-list {
 		width:990px;
-		height:110px;
-		padding:10px;	
+		height:auto;
 	}
 	
-	.content .business .b-box .b-list ul li {
+	.content .business .b-box .b-list .b-item {
 		list-style:none;
 		float:left;
 		width:235px;
 		height:100px;
-		margin-right:10px;
-		padding-top:10px;
+		margin:5px;
 		border:1px solid #ddd;
 		box-shadow:1px 1px 10px #f0f0f0;
 	}	
-		
-	.content .business .b-box .b-list ul li i,a,span {
+	.content .business .b-box .b-list .b-item:hover {
+		border:1px solid #1CBD9D;
+		box-shadow:1px 1px 10px #f0f0f0;
+	}		
+	.content .business .b-box .b-list .b-item a {
 		display:block;
 		text-align:center;	
 		color:#1CBD9D;
 	}
 	
-	.content .business .b-box .b-list  ul li i{
+	.content .business .b-box .b-list i{
 		font-size:24px;	
 		line-height:30px;
 	}
@@ -151,19 +154,20 @@
 	.content .thing {
 		width:100%;
 		background:#fff;
-		height:300px;
+		height:350px;
 		border-top:1px solid #f0f0f0;
 	}
 	
 	.content .thing .t-box {
 		width:1000px;
-		height:80px;
+		height:350px;
 		margin:0 auto;
 	}
 	
 	.content .thing .t-box .t-title {
 		width:1000px;
 		height:80px;
+		float:left;
 	}
 	
 	.content .thing .t-box .t-title .t-t-line,.t-t-title {
@@ -182,32 +186,26 @@
 		background:#f90 ;
 	}
 	
-	.content .thing .t-box .t-list ul li {
+	.content .thing .t-box .t-list .t-item {
 		list-style:none;
 		float:left;
 		width:235px;
 		height:100px;
-		margin-right:10px;
-		padding-top:10px;
+		margin:5px;
 		border:1px solid #ddd;
 		box-shadow:1px 1px 10px #f0f0f0;
 	}
 	
-	.content .thing .t-box .t-list ul li i,a,span {
+	.content .thing .t-box .t-list .t-item a {
 		display:block;
 		text-align:center;	
 		color:#1CBD9D;
 	}
 	
-	.content .thing .t-box .t-list ul li i{
-		font-size:24px;	
-		line-height:30px;
-	}
-	
 	.content .page {
 		width:100%;
 		background:#fafafa;
-		height:300px;
+		height:350px;
 		border-top:1px solid #f0f0f0;
 	}
 	
@@ -238,7 +236,7 @@
 		background:#646464 ;
 	}	
 	
-	.content .page .p-box .p-list ul li {
+	.content .page .p-box .p-list .p-item {
 		list-style:none;
 		float:left;
 		width:235px;
@@ -249,17 +247,11 @@
 		box-shadow:1px 1px 10px #f0f0f0;
 	}
 	
-	.content .page .p-box .p-list ul li i,a,span {
+	.content .page .p-box .p-list .p-item a {
 		display:block;
 		text-align:center;	
 		color:#1CBD9D;
 	}
-	
-	.content .page .p-box .p-list ul li i{
-		font-size:24px;	
-		line-height:30px;
-	}
-	
 	
 </style>
 
@@ -280,32 +272,15 @@
 	<!-- 在线订座 开始 -->
 	<div class="c-seat">
 		<div class="c-s-box">
-			<ul>
-				<li>
-					
-					<a href="javascript:void(0);" >我要来开会</a>
-					<a href="javascript:void(0);">已有88982323人定购</a>
-					<a href="javascript:void(0);" class="buy">点击预定</a>
-				</li>
-				<li>
-					
-					<a href="javascript:void(0);">我只喝茶</a>		
-					<a href="javascript:void(0);">已有88982323人定购</a>
+			<c:forEach items="${houseGoods }" var="goods">
+				<div class="c-item">
+					<a href="javascript:void(0);" >${goods.name }</a>
+					<a href="javascript:void(0);">已有${goods.hot }人定购</a>
 					<a href="javascript:void(0);" class="buy">点击预定</a>		
-				</li>
-				<li>
-					
-					<a href="javascript:void(0);">我来下盘棋</a>	
-					<a href="javascript:void(0);">已有88982323人定购</a>
-					<a href="javascript:void(0);" class="buy">点击预定</a>
-				</li>
-				<li>
-					
-					<a href="javascript:void(0);">我需要安静</a>	
-					<a href="javascript:void(0);">已有88982323人定购</a>
-					<a href="javascript:void(0);" class="buy">点击预定</a>
-				</li>
-			</ul>
+					<img src="<c:choose><c:when test="${goods.coverImg != null}">../resource/${goods.coverImg }</c:when>
+					<c:otherwise>../images/led.png</c:otherwise></c:choose>" width=36px height=36px >	
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	<!-- 在线订座 结束 -->
@@ -321,28 +296,13 @@
 			
 			<!-- 订制内容 -->
 			<div class="b-list">
-				<ul>
-					<li>
-						<a href="javascript:void(0);">我要来开会</a>
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">我只喝茶</a>		
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>		
-					</li>
-					<li>
-						<a href="javascript:void(0);">我来下盘棋</a>	
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">我需要安静</a>	
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-				</ul>				
+				<c:forEach items="${teaGoods }" var="goods">
+				<div class="b-item">
+					<a href="javascript:void(0);">${goods.name }</a>
+					<a href="javascript:void(0);">已有${goods.hot }人定购</a>
+					<a href="javascript:void(0);" class="buy">点击预定</a>
+				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -359,28 +319,13 @@
 			
 			<!-- 订制内容 -->
 			<div class="t-list">
-				<ul>
-					<li>
-						<a href="javascript:void(0);">我要来开会</a>
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">我只喝茶</a>		
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>		
-					</li>
-					<li>
-						<a href="javascript:void(0);">我来下盘棋</a>	
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">我需要安静</a>	
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-				</ul>				
+				<c:forEach items="${toolGoods }" var="goods">
+				<div class="t-item">
+					<a href="javascript:void(0);">${goods.name }</a>
+					<a href="javascript:void(0);">已有${goods.hot }人定购</a>
+					<a href="javascript:void(0);" class="buy">点击预定</a>
+				</div>
+				</c:forEach>				
 			</div>
 		</div>
 	</div>
@@ -398,28 +343,13 @@
 			
 			<!-- 订制内容 -->
 			<div class="p-list">
-				<ul>
-					<li>
-						<a href="javascript:void(0);">我要来开会</a>
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">我只喝茶</a>		
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>		
-					</li>
-					<li>
-						<a href="javascript:void(0);">我来下盘棋</a>	
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">我需要安静</a>	
-						<a href="javascript:void(0);">已有88982323人定购</a>
-						<a href="javascript:void(0);" class="buy">点击预定</a>
-					</li>
-				</ul>					
+				<c:forEach items="${cultureGoods }" var="goods">
+				<div class="p-item">
+					<a href="javascript:void(0);">${goods.name }</a>
+					<a href="javascript:void(0);">已有${goods.hot }人定购</a>
+					<a href="javascript:void(0);" class="buy">点击预定</a>
+				</div>
+				</c:forEach>					
 			</div>
 		</div>
 	</div>
@@ -427,7 +357,7 @@
 	
 	<script type="text/javascript">
 		$(".c-seat,.page,.thing,.business").on("click",function(){
-			window.location.href = "${basePath}buy/shelf";
+			//window.location.href = "${basePath}buy/shelf";
 			
 		});
 	</script>

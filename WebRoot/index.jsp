@@ -7,6 +7,7 @@
 	<meta name="pragma" content="no-cache">
 	<meta name="cache-control" content="no-cache">
 	<meta name=X-UA-Compatible content="IE=edge,chrome=1"> 
+	<meta http-equiv="refresh" content="5; URL=${basePath}home/index">
 	<meta name="expires" content="0">
 	<meta name="keywords" content="惠宇茶舍,茶舍,惠宇,惠州,惠阳,品茗,喝茶,纯静,纯静空间,休闲,休闲舒适,棋牌,商务">
 	<meta name="description" content="惠宇茶舍网上订座">
@@ -93,7 +94,7 @@
 
 <body>
 	<div class="hy-welcom">
-		<a href="${basePath}home.jsp" id="b-hycs" data-status="f">
+		<a href="${basePath}home/index" id="b-hycs" data-status="f">
 			<img alt="" src="images/led.png" width="250px">
 			<img alt="" src="images/yun.png" width="450px">
 		</a> 
@@ -139,6 +140,10 @@
 			}, 1);
 			$("#f-title").fadeOut(1000);
 		}
+		
+		$("body,html").click(function(){
+			window.location.href= getRootPath()+"/home/index";
+		});
 	</script>
 
 </body>

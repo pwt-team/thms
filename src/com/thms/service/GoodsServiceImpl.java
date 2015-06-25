@@ -52,4 +52,10 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.findGoods(typeId,name,pageNo,psize);
 	}
 
+	@Override
+	public List<Goods> findGoodsByType(Integer type, Integer pageNo, Integer psize) {
+		if(type == null) return null;
+		return goodsDao.findGoodsByType(type,pageNo,psize);
+	}
+
 }

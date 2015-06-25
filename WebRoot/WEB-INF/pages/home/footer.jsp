@@ -290,10 +290,20 @@
 </div>
 
 <script type="text/javascript">
-	var scrollHeight = getScrollHeight();
-	
-	/* 处理滚动条
-	$(window).scroll(function() {
+
+	$(document).ready(function () {
+		alert(22222222);
+	    $(window).scroll(function () {
+			alert(666666666);
+	    });
+	});
+
+
+
+	//var scrollHeight = getScrollHeight();
+	//console.log(scrollHeight);
+	/* 处理滚动条 */
+/* 	$(window).scroll(function() {
 		var box = $("#back");
 		if ($(window).scrollTop() >= 100) {
 			$(".right-tool").stop().show();
@@ -307,7 +317,13 @@
 			box.attr("title", "回到底端");
 		}
 		console.log($(window).scrollTop());
+	}); */
+	
+	$(window).scroll(function(){
+		alert(2222);
 	});
+	
+	/*
 	$("#back").click(function() {
 		var key = $(this).children("i").data("keys");
 		if (key == "down") {
